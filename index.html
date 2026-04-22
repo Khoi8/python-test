@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CIS 3260 — Python Practice Test</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card-light: #334155;
+    --accent: #3b82f6;
+    --accent-hover: #2563eb;
+    --text: #f1f5f9;
+    --text-dim: #94a3b8;
+    --correct: #22c55e;
+    --wrong: #ef4444;
+    --border: #475569;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  header {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+  }
+  h1 {
+    margin: 0 0 8px 0;
+    font-size: 28px;
+    color: var(--accent);
+  }
+  .subtitle {
+    color: var(--text-dim);
+    margin: 0;
+    font-size: 15px;
+  }
+  .info-box {
+    background: rgba(59, 130, 246, 0.1);
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  .name-card {
+    background: var(--card);
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .name-card label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .name-card input {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 15px;
+  }
+  .question {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 18px;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .question:focus-within { border-color: var(--accent); }
+  .q-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .q-num {
+    background: var(--accent);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .q-tag {
+    background: var(--card-light);
+    color: var(--text-dim);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .q-text {
+    font-size: 16px;
+    margin: 8px 0 16px 0;
+  }
+  pre {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 14px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: "Monaco", "Consolas", monospace;
+    font-size: 14px;
+    margin: 12px 0;
+  }
+  code.inline {
+    background: var(--bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: "Monaco", "Consolas", monospace;
+    font-size: 13px;
+  }
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .option:hover { border-color: var(--accent); }
+  .option input[type="radio"] {
+    margin-top: 4px;
+    accent-color: var(--accent);
+  }
+  .option span { flex: 1; }
+  textarea {
+    width: 100%;
+    min-height: 110px;
+    padding: 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: "Monaco", "Consolas", monospace;
+    font-size: 14px;
+    resize: vertical;
+  }
+  textarea:focus, .name-card input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+  }
+  .submit-btn:hover { background: var(--accent-hover); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .success {
+    text-align: center;
+    padding: 48px 24px;
+    background: var(--card);
+    border-radius: 12px;
+    border: 1px solid var(--correct);
+  }
+  .success h2 { color: var(--correct); margin-top: 0; }
+  .score-display {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 16px 0;
+  }
+  .hidden { display: none; }
+  .footer-note {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>🐍 CIS 3260 — Python Practice Test</h1>
+    <p class="subtitle">Covers Chapters 3–8: selection, strings, loops, functions, lists, and 2D lists</p>
+    <div class="info-box">
+      <strong>16 questions</strong> · 8 multiple choice + 8 short answer · No time limit · Your results will be emailed automatically when you submit.
+    </div>
+  </header>
+
+  <div id="testFormWrapper">
+  <form id="testForm" action="https://formsubmit.co/khoiisaswe@gmail.com" method="POST">
+
+    <!-- FormSubmit configuration -->
+    <input type="hidden" name="_subject" value="Python Practice Test — Submission" />
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="_template" value="table" />
+    <input type="hidden" name="_autoresponse" value="Thanks for completing the Python practice test! Your results have been received." />
+    <input type="text" name="_honey" style="display:none" />
+
+    <!-- Hidden score fields populated by JS before submit -->
+    <input type="hidden" id="mcScore" name="MC_Score" value="" />
+    <input type="hidden" id="mcDetails" name="MC_Details" value="" />
+
+    <!-- Name -->
+    <div class="name-card">
+      <label for="studentName">Your Name</label>
+      <input type="text" id="studentName" name="Student_Name" required placeholder="First and last name" />
+    </div>
+
+    <!-- ===== MULTIPLE CHOICE ===== -->
+
+    <!-- Q1 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q1</span>
+        <span class="q-tag">Concept · Booleans</span>
+      </div>
+      <p class="q-text">Which expression evaluates to <code class="inline">True</code> when <code class="inline">x = 7</code>?</p>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q1" value="A" required><span>A) <code class="inline">x &gt; 5 and x &lt; 5</code></span></label>
+        <label class="option"><input type="radio" name="Q1" value="B"><span>B) <code class="inline">not (x == 7)</code></span></label>
+        <label class="option"><input type="radio" name="Q1" value="C"><span>C) <code class="inline">x &gt; 10 or x &lt; 5</code></span></label>
+        <label class="option"><input type="radio" name="Q1" value="D"><span>D) <code class="inline">x % 2 == 1 or x &gt; 100</code></span></label>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q2</span>
+        <span class="q-tag">Code Reading · String Slicing</span>
+      </div>
+      <p class="q-text">What is the value of <code class="inline">s[2:6]</code> when <code class="inline">s = "Computer"</code>?</p>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q2" value="A" required><span>A) <code class="inline">"mput"</code></span></label>
+        <label class="option"><input type="radio" name="Q2" value="B"><span>B) <code class="inline">"mpute"</code></span></label>
+        <label class="option"><input type="radio" name="Q2" value="C"><span>C) <code class="inline">"ompu"</code></span></label>
+        <label class="option"><input type="radio" name="Q2" value="D"><span>D) <code class="inline">"omput"</code></span></label>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q3</span>
+        <span class="q-tag">Code Reading · String Operations</span>
+      </div>
+      <p class="q-text">What does <code class="inline">"ab" * 3 + "c"</code> evaluate to?</p>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q3" value="A" required><span>A) <code class="inline">"abababc"</code></span></label>
+        <label class="option"><input type="radio" name="Q3" value="B"><span>B) <code class="inline">"ababab c"</code></span></label>
+        <label class="option"><input type="radio" name="Q3" value="C"><span>C) <code class="inline">"abc abc abc"</code></span></label>
+        <label class="option"><input type="radio" name="Q3" value="D"><span>D) TypeError</span></label>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q4</span>
+        <span class="q-tag">Code Reading · for / range</span>
+      </div>
+      <p class="q-text">What is printed by the following code?</p>
+<pre>for i in range(2, 11, 3):
+    print(i, end=" ")</pre>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q4" value="A" required><span>A) <code class="inline">2 5 8</code></span></label>
+        <label class="option"><input type="radio" name="Q4" value="B"><span>B) <code class="inline">2 5 8 11</code></span></label>
+        <label class="option"><input type="radio" name="Q4" value="C"><span>C) <code class="inline">3 6 9</code></span></label>
+        <label class="option"><input type="radio" name="Q4" value="D"><span>D) <code class="inline">2 4 6 8 10</code></span></label>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q5</span>
+        <span class="q-tag">Does It Compile? · Function Calls</span>
+      </div>
+      <p class="q-text">Given <code class="inline">def greet(name, count):</code>, which call would produce a <strong>SyntaxError</strong>?</p>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q5" value="A" required><span>A) <code class="inline">greet("Sam", 3)</code></span></label>
+        <label class="option"><input type="radio" name="Q5" value="B"><span>B) <code class="inline">greet("Sam", count=3)</code></span></label>
+        <label class="option"><input type="radio" name="Q5" value="C"><span>C) <code class="inline">greet(name="Sam", count=3)</code></span></label>
+        <label class="option"><input type="radio" name="Q5" value="D"><span>D) <code class="inline">greet(count=3, "Sam")</code></span></label>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q6</span>
+        <span class="q-tag">Code Reading · List Methods</span>
+      </div>
+      <p class="q-text">After running this code, what is the value of <code class="inline">nums</code>?</p>
+<pre>nums = [10, 20, 30]
+nums.insert(1, 99)
+nums.append(40)</pre>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q6" value="A" required><span>A) <code class="inline">[99, 10, 20, 30, 40]</code></span></label>
+        <label class="option"><input type="radio" name="Q6" value="B"><span>B) <code class="inline">[10, 99, 20, 30, 40]</code></span></label>
+        <label class="option"><input type="radio" name="Q6" value="C"><span>C) <code class="inline">[10, 20, 99, 30, 40]</code></span></label>
+        <label class="option"><input type="radio" name="Q6" value="D"><span>D) <code class="inline">[10, 99, 20, 40, 30]</code></span></label>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q7</span>
+        <span class="q-tag">What's Wrong? · Loops</span>
+      </div>
+      <p class="q-text">What is the problem with this code?</p>
+<pre>count = 0
+while count &lt; 5:
+    print(count)</pre>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q7" value="A" required><span>A) Syntax error in the <code class="inline">while</code> line</span></label>
+        <label class="option"><input type="radio" name="Q7" value="B"><span>B) <code class="inline">print</code> should not be inside the loop</span></label>
+        <label class="option"><input type="radio" name="Q7" value="C"><span>C) The loop never terminates (infinite loop)</span></label>
+        <label class="option"><input type="radio" name="Q7" value="D"><span>D) Nothing — it prints 0 through 4</span></label>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q8</span>
+        <span class="q-tag">Concept · 2D Lists</span>
+      </div>
+      <p class="q-text">Given <code class="inline">m = [[1,2,3],[4,5,6],[7,8,9]]</code>, what does <code class="inline">m[2][1]</code> return?</p>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q8" value="A" required><span>A) <code class="inline">4</code></span></label>
+        <label class="option"><input type="radio" name="Q8" value="B"><span>B) <code class="inline">5</code></span></label>
+        <label class="option"><input type="radio" name="Q8" value="C"><span>C) <code class="inline">7</code></span></label>
+        <label class="option"><input type="radio" name="Q8" value="D"><span>D) <code class="inline">8</code></span></label>
+      </div>
+    </div>
+
+    <!-- ===== SHORT ANSWER ===== -->
+
+    <!-- Q9 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q9</span>
+        <span class="q-tag">Code Writing · if / elif / else</span>
+      </div>
+      <p class="q-text">Write a Python program that asks the user for a temperature (an integer) and prints:
+        <br>• <code class="inline">"Hot"</code> if the temperature is greater than 85
+        <br>• <code class="inline">"Warm"</code> if the temperature is between 60 and 85 (inclusive)
+        <br>• <code class="inline">"Cold"</code> if the temperature is below 60</p>
+      <textarea name="Q9_Answer" required placeholder="# Type your Python code here"></textarea>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q10</span>
+        <span class="q-tag">Code Tracing · String Methods</span>
+      </div>
+      <p class="q-text">What is the exact output of this code? (Show what gets printed.)</p>
+<pre>s = "  Hello World  "
+print(s.strip().lower().replace("world", "python"))</pre>
+      <textarea name="Q10_Answer" required placeholder="Output:"></textarea>
+    </div>
+
+    <!-- Q11 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q11</span>
+        <span class="q-tag">Code Writing · while + Sentinel</span>
+      </div>
+      <p class="q-text">Write a Python program that repeatedly asks the user to enter positive numbers and adds them to a running total. The loop should stop when the user enters <code class="inline">-1</code>. After the loop ends, print the total.</p>
+      <textarea name="Q11_Answer" required placeholder="# Type your Python code here"></textarea>
+    </div>
+
+    <!-- Q12 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q12</span>
+        <span class="q-tag">What's Wrong? · Functions</span>
+      </div>
+      <p class="q-text">Find and explain at least <strong>two</strong> things wrong with this function. (You don't need to rewrite it — just describe the bugs.)</p>
+<pre>def average(a, b, c):
+    total = a + b + c
+    average = total / 3
+print(average)</pre>
+      <textarea name="Q12_Answer" required placeholder="Bug 1: ...&#10;Bug 2: ..."></textarea>
+    </div>
+
+    <!-- Q13 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q13</span>
+        <span class="q-tag">Code Writing · Function with return</span>
+      </div>
+      <p class="q-text">Write a function called <code class="inline">is_even</code> that takes one integer parameter and <strong>returns</strong> <code class="inline">True</code> if the number is even, or <code class="inline">False</code> if it is odd.</p>
+      <textarea name="Q13_Answer" required placeholder="# Type your function definition here"></textarea>
+    </div>
+
+    <!-- Q14 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q14</span>
+        <span class="q-tag">Code Tracing · Lists</span>
+      </div>
+      <p class="q-text">What does this code print?</p>
+<pre>lst = [4, 1, 7, 3]
+lst.sort()
+lst.append(0)
+print(lst[1:4])</pre>
+      <textarea name="Q14_Answer" required placeholder="Output:"></textarea>
+    </div>
+
+    <!-- Q15 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q15</span>
+        <span class="q-tag">Code Writing · Lists + for loop</span>
+      </div>
+      <p class="q-text">Write code that builds a list containing the numbers 1 through 10, then uses a <code class="inline">for</code> loop to print only the <strong>even</strong> numbers from that list.</p>
+      <textarea name="Q15_Answer" required placeholder="# Type your Python code here"></textarea>
+    </div>
+
+    <!-- Q16 -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q16</span>
+        <span class="q-tag">Code Writing · 2D Lists</span>
+      </div>
+      <p class="q-text">Given the 2D list <code class="inline">grid = [[1, 2, 3], [4, 5, 6]]</code>, write a nested loop that prints every element on its own line (so the output is the numbers 1 through 6, each on a separate line).</p>
+      <textarea name="Q16_Answer" required placeholder="# Type your Python code here"></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn" id="submitBtn">Submit Test</button>
+    <p class="footer-note">Your name, multiple-choice score, and all written answers will be emailed to your instructor.</p>
+
+  </form>
+  </div>
+
+  <div id="successMsg" class="success hidden">
+    <h2>✅ Test Submitted!</h2>
+    <p>Thanks for completing the test. Your responses have been emailed.</p>
+    <div>Your auto-graded score on the multiple-choice section:</div>
+    <div class="score-display" id="finalScore">—</div>
+    <p style="color: var(--text-dim); font-size: 14px;">(Short-answer questions will be graded manually.)</p>
+  </div>
+
+</div>
+
+<script>
+  // Correct answers for the 8 multiple-choice questions
+  const ANSWER_KEY = {
+    Q1: "D", // x % 2 == 1 or x > 100  -> 7 is odd, so True
+    Q2: "A", // "Computer"[2:6] -> "mput"
+    Q3: "A", // "ab"*3 + "c" -> "abababc"
+    Q4: "A", // range(2,11,3) -> 2,5,8
+    Q5: "D", // positional after keyword is a SyntaxError
+    Q6: "B", // [10, 99, 20, 30, 40]
+    Q7: "C", // infinite loop — count never increments
+    Q8: "D"  // m[2] is [7,8,9], [1] -> 8
+  };
+
+  const form = document.getElementById('testForm');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', function(e) {
+    // Compute MC score
+    let score = 0;
+    let details = [];
+    for (const q in ANSWER_KEY) {
+      const selected = form.elements[q].value;
+      const correct = ANSWER_KEY[q];
+      const isCorrect = selected === correct;
+      if (isCorrect) score++;
+      details.push(`${q}: chose ${selected} (correct: ${correct}) ${isCorrect ? '✓' : '✗'}`);
+    }
+    document.getElementById('mcScore').value = `${score} / 8`;
+    document.getElementById('mcDetails').value = details.join('\n');
+
+    // Disable button to prevent double-submit
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting…';
+
+    // Stash score so we can show the success view if FormSubmit redirects back
+    try { sessionStorage.setItem('lastScore', `${score} / 8`); } catch(e) {}
+
+    // Let the form submit normally to FormSubmit
+  });
+
+  // If we ever land back here with a score in session, show the success view
+  window.addEventListener('DOMContentLoaded', function() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('submitted') === '1') {
+      document.getElementById('testFormWrapper').classList.add('hidden');
+      const success = document.getElementById('successMsg');
+      success.classList.remove('hidden');
+      try {
+        const s = sessionStorage.getItem('lastScore');
+        if (s) document.getElementById('finalScore').textContent = s;
+      } catch(e) {}
+    }
+  });
+</script>
+</body>
+</html>
