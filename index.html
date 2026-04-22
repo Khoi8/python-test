@@ -2,76 +2,60 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>CIS 3260 — Python Practice Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CIS 3260 — Python Practice Test v2</title>
 <style>
   :root {
-    --bg: #0f172a;
-    --card: #1e293b;
-    --card-light: #334155;
-    --accent: #3b82f6;
-    --accent-hover: #2563eb;
-    --text: #f1f5f9;
-    --text-dim: #94a3b8;
-    --correct: #22c55e;
-    --wrong: #ef4444;
-    --border: #475569;
+    --bg: #0f1115;
+    --card: #1a1d24;
+    --card-hover: #20242d;
+    --text: #e8e8ea;
+    --text-dim: #9aa0a8;
+    --accent: #4f8cf7;
+    --accent-hover: #3b77e0;
+    --border: #2a2f38;
+    --correct: #4ade80;
+    --wrong: #f87171;
+    --tag-bg: #2a2f38;
   }
   * { box-sizing: border-box; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
     margin: 0;
     padding: 20px;
-    line-height: 1.6;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
   }
-  .container {
-    max-width: 820px;
-    margin: 0 auto;
-  }
-  header {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 28px;
-    margin-bottom: 24px;
-    border: 1px solid var(--border);
-  }
-  h1 {
-    margin: 0 0 8px 0;
-    font-size: 28px;
-    color: var(--accent);
-  }
-  .subtitle {
-    color: var(--text-dim);
-    margin: 0;
-    font-size: 15px;
-  }
+  .container { max-width: 760px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 30px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  .subtitle { color: var(--text-dim); font-size: 15px; margin: 0 0 12px; }
   .info-box {
-    background: rgba(59, 130, 246, 0.1);
-    border-left: 3px solid var(--accent);
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin-top: 16px;
+    background: var(--card);
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
     font-size: 14px;
     color: var(--text-dim);
   }
+  .info-box strong { color: var(--text); }
   .name-card {
     background: var(--card);
-    padding: 20px 24px;
+    padding: 20px;
     border-radius: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     border: 1px solid var(--border);
   }
   .name-card label {
     display: block;
     font-weight: 600;
     margin-bottom: 8px;
-    color: var(--text);
+    font-size: 15px;
   }
   .name-card input {
     width: 100%;
-    padding: 10px 12px;
+    padding: 12px;
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 6px;
@@ -80,79 +64,67 @@
   }
   .question {
     background: var(--card);
+    padding: 22px;
     border-radius: 12px;
-    padding: 24px;
     margin-bottom: 18px;
     border: 1px solid var(--border);
-    transition: border-color 0.2s;
   }
-  .question:focus-within { border-color: var(--accent); }
   .q-header {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     flex-wrap: wrap;
   }
   .q-num {
     background: var(--accent);
     color: white;
-    padding: 4px 10px;
-    border-radius: 20px;
+    padding: 3px 10px;
+    border-radius: 12px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
   }
   .q-tag {
-    background: var(--card-light);
+    background: var(--tag-bg);
     color: var(--text-dim);
-    padding: 4px 10px;
-    border-radius: 20px;
+    padding: 3px 10px;
+    border-radius: 12px;
     font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
   }
-  .q-text {
-    font-size: 16px;
-    margin: 8px 0 16px 0;
-  }
+  .q-text { margin: 0 0 14px; font-size: 15px; }
   pre {
     background: var(--bg);
-    border: 1px solid var(--border);
     padding: 14px;
-    border-radius: 6px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
     overflow-x: auto;
     font-family: "Monaco", "Consolas", monospace;
-    font-size: 14px;
-    margin: 12px 0;
+    font-size: 13.5px;
+    color: #d4d4d8;
+    margin: 10px 0;
   }
-  code.inline {
+  .inline {
     background: var(--bg);
     padding: 2px 6px;
     border-radius: 4px;
     font-family: "Monaco", "Consolas", monospace;
     font-size: 13px;
   }
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+  .options { display: flex; flex-direction: column; gap: 8px; }
   .option {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    padding: 10px 14px;
+    padding: 10px 12px;
     background: var(--bg);
     border: 1px solid var(--border);
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.15s;
+    transition: border-color 0.15s;
+    font-size: 14px;
   }
   .option:hover { border-color: var(--accent); }
-  .option input[type="radio"] {
-    margin-top: 4px;
-    accent-color: var(--accent);
-  }
+  .option input[type="radio"] { margin-top: 4px; accent-color: var(--accent); }
   .option span { flex: 1; }
   textarea {
     width: 100%;
@@ -212,231 +184,222 @@
 <div class="container">
 
   <header>
-    <h1>🐍 CIS 3260 — Python Practice Test</h1>
-    <p class="subtitle">Covers Weeks 8–14: strings, loops, functions, lists, 2D lists, and dictionaries</p>
+    <h1>🐍 CIS 3260 — Python Practice Test <span style="color:var(--text-dim);font-size:18px;">v2</span></h1>
+    <p class="subtitle">Covers Weeks 6–14: strings, loops, functions, lists, 2D lists, dictionaries</p>
     <div class="info-box">
-      <strong>16 questions</strong> · 8 multiple choice + 8 short answer · No time limit · Your results will be emailed automatically when you submit.
+      <strong>25 questions</strong> · 12 MC + 13 short answer · Questions are mixed · MC is auto-graded; short answers are graded manually.
     </div>
   </header>
 
   <div id="testFormWrapper">
   <form id="testForm" action="https://formsubmit.co/khoiisaswe@gmail.com" method="POST">
 
-    <!-- FormSubmit configuration -->
-    <input type="hidden" name="_subject" value="Python Practice Test — Submission" />
+    <input type="hidden" name="_subject" value="Python Practice Test v2 — Submission" />
     <input type="hidden" name="_captcha" value="false" />
     <input type="hidden" name="_template" value="table" />
-    <input type="hidden" name="_autoresponse" value="Thanks for completing the Python practice test! Your results have been received." />
-    <input type="text" name="_honey" style="display:none" />
+    <input type="hidden" name="_next" value="https://khoi8.github.io/?submitted=1" />
+    <input type="hidden" name="MC_Score" id="mcScore" />
+    <input type="hidden" name="MC_Details" id="mcDetails" />
 
-    <!-- Hidden score fields populated by JS before submit -->
-    <input type="hidden" id="mcScore" name="MC_Score" value="" />
-    <input type="hidden" id="mcDetails" name="MC_Details" value="" />
-
-    <!-- Name -->
     <div class="name-card">
       <label for="studentName">Your Name</label>
       <input type="text" id="studentName" name="Student_Name" required placeholder="First and last name" />
     </div>
 
-    <!-- ===== MULTIPLE CHOICE ===== -->
-
-    <!-- Q1 -->
+    <!-- Q1 MC: Function imports (Ch 6.7) -->
     <div class="question">
       <div class="q-header">
         <span class="q-num">Q1</span>
-        <span class="q-tag">Concept · Function Imports</span>
+        <span class="q-tag">Multiple Choice · Function imports</span>
       </div>
-      <p class="q-text">You have a file <code class="inline">mymath.py</code> containing this function:</p>
-<pre>def square(n):
-    return n * n</pre>
-      <p class="q-text">In a <strong>separate</strong> Python file, which of the following is a correct way to use <code class="inline">square()</code>?</p>
+      <p class="q-text">You have a file <code class="inline">convert.py</code> that contains a function <code class="inline">celsiusToFahrenheit(c)</code>. You want to use it from a different file <code class="inline">test.py</code>. Which is a correct way to do it?</p>
       <div class="options">
-        <label class="option"><input type="radio" name="Q1" value="A" required><span>A) <code class="inline">import mymath</code>, then call <code class="inline">mymath.square(5)</code></span></label>
-        <label class="option"><input type="radio" name="Q1" value="B"><span>B) <code class="inline">from mymath import square</code>, then call <code class="inline">square(5)</code></span></label>
+        <label class="option"><input type="radio" name="Q1" value="A" required><span>A) <code class="inline">import convert</code>, then call <code class="inline">convert.celsiusToFahrenheit(32)</code></span></label>
+        <label class="option"><input type="radio" name="Q1" value="B"><span>B) <code class="inline">from convert import celsiusToFahrenheit</code>, then call <code class="inline">celsiusToFahrenheit(32)</code></span></label>
         <label class="option"><input type="radio" name="Q1" value="C"><span>C) Both A and B are correct</span></label>
-        <label class="option"><input type="radio" name="Q1" value="D"><span>D) You cannot reuse functions across different files</span></label>
+        <label class="option"><input type="radio" name="Q1" value="D"><span>D) You cannot reuse functions across files</span></label>
       </div>
     </div>
 
-    <!-- Q2 -->
+    <!-- Q2 SA: Fill-in-blank string expressions -->
     <div class="question">
       <div class="q-header">
         <span class="q-num">Q2</span>
-        <span class="q-tag">Code Reading · String Slicing</span>
+        <span class="q-tag">Fill in Blank · String Expressions</span>
       </div>
-      <p class="q-text">What is the value of <code class="inline">s[2:6]</code> when <code class="inline">s = "Computer"</code>?</p>
-      <div class="options">
-        <label class="option"><input type="radio" name="Q2" value="A" required><span>A) <code class="inline">"mput"</code></span></label>
-        <label class="option"><input type="radio" name="Q2" value="B"><span>B) <code class="inline">"mpute"</code></span></label>
-        <label class="option"><input type="radio" name="Q2" value="C"><span>C) <code class="inline">"ompu"</code></span></label>
-        <label class="option"><input type="radio" name="Q2" value="D"><span>D) <code class="inline">"omput"</code></span></label>
-      </div>
+      <p class="q-text">Given <code class="inline">s1 = "Computer Science"</code> and <code class="inline">s2 = "3260"</code>, write the value of each expression:</p>
+<pre>a) s1[0]          = _______
+b) s1[-3]         = _______
+c) s1[2:6]        = _______
+d) s2 * 3         = _______
+e) len(s1)        = _______
+f) s1.count('e')  = _______
+g) s1.isalpha()   = _______
+h) s2.isdigit()   = _______</pre>
+      <textarea name="Q2_Answer" required placeholder="a) ...&#10;b) ...&#10;c) ..."></textarea>
     </div>
 
-    <!-- Q3 -->
+    <!-- Q3 MC: String slicing -->
     <div class="question">
       <div class="q-header">
         <span class="q-num">Q3</span>
-        <span class="q-tag">Code Reading · String Operations</span>
+        <span class="q-tag">Multiple Choice · String slicing</span>
       </div>
-      <p class="q-text">What does <code class="inline">"ab" * 3 + "c"</code> evaluate to?</p>
+      <p class="q-text">What is the value of <code class="inline">s[2:6]</code> when <code class="inline">s = "Computer"</code>?</p>
       <div class="options">
-        <label class="option"><input type="radio" name="Q3" value="A" required><span>A) <code class="inline">"abababc"</code></span></label>
-        <label class="option"><input type="radio" name="Q3" value="B"><span>B) <code class="inline">"ababab c"</code></span></label>
-        <label class="option"><input type="radio" name="Q3" value="C"><span>C) <code class="inline">"abc abc abc"</code></span></label>
-        <label class="option"><input type="radio" name="Q3" value="D"><span>D) TypeError</span></label>
+        <label class="option"><input type="radio" name="Q3" value="A" required><span>A) <code class="inline">"mput"</code></span></label>
+        <label class="option"><input type="radio" name="Q3" value="B"><span>B) <code class="inline">"mpute"</code></span></label>
+        <label class="option"><input type="radio" name="Q3" value="C"><span>C) <code class="inline">"ompu"</code></span></label>
+        <label class="option"><input type="radio" name="Q3" value="D"><span>D) <code class="inline">"omput"</code></span></label>
       </div>
     </div>
 
-    <!-- Q4 -->
+    <!-- Q4 SA: Chained string methods trace -->
     <div class="question">
       <div class="q-header">
         <span class="q-num">Q4</span>
-        <span class="q-tag">Code Reading · for / range</span>
+        <span class="q-tag">Code Tracing · String Methods</span>
+      </div>
+      <p class="q-text">What is printed?</p>
+<pre>s = "   Welcome to PYTHON   "
+print(s.strip().lower().replace("python", "coding"))</pre>
+      <textarea name="Q4_Answer" required placeholder="Output:"></textarea>
+    </div>
+
+    <!-- Q5 MC: String methods .count() -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q5</span>
+        <span class="q-tag">Multiple Choice · str methods</span>
+      </div>
+      <p class="q-text">What does <code class="inline">"Georgia State".count('a')</code> return?</p>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q5" value="A" required><span>A) <code class="inline">0</code></span></label>
+        <label class="option"><input type="radio" name="Q5" value="B"><span>B) <code class="inline">1</code></span></label>
+        <label class="option"><input type="radio" name="Q5" value="C"><span>C) <code class="inline">2</code></span></label>
+        <label class="option"><input type="radio" name="Q5" value="D"><span>D) <code class="inline">3</code></span></label>
+      </div>
+    </div>
+
+    <!-- Q6 SA: while + sentinel with accumulation (KEY) -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q6</span>
+        <span class="q-tag">Code Writing · while + Sentinel</span>
+      </div>
+      <p class="q-text">Write a program that repeatedly asks the user for a test score. When the user enters <code class="inline">-1</code>, stop the loop. Then print <strong>both</strong> the total of all scores entered and the average.</p>
+      <p class="q-text" style="color:var(--text-dim);font-size:13px;">Hint: You need (1) an accumulator variable initialized before the loop, (2) an <code class="inline">input()</code> call inside the loop so the value changes each iteration, and (3) print statements <em>after</em> the loop ends.</p>
+      <textarea name="Q6_Answer" required placeholder="# Type your Python code here"></textarea>
+    </div>
+
+    <!-- Q7 MC: String repetition -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q7</span>
+        <span class="q-tag">Multiple Choice · String repetition</span>
+      </div>
+      <p class="q-text">What does <code class="inline">"ab" * 3 + "c"</code> evaluate to?</p>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q7" value="A" required><span>A) <code class="inline">"abababc"</code></span></label>
+        <label class="option"><input type="radio" name="Q7" value="B"><span>B) <code class="inline">"ababab c"</code></span></label>
+        <label class="option"><input type="radio" name="Q7" value="C"><span>C) <code class="inline">"abc abc abc"</code></span></label>
+        <label class="option"><input type="radio" name="Q7" value="D"><span>D) <code class="inline">TypeError</code></span></label>
+      </div>
+    </div>
+
+    <!-- Q8 SA: Function with return (KEY) -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q8</span>
+        <span class="q-tag">Code Writing · Function with return</span>
+      </div>
+      <p class="q-text">Write a function called <code class="inline">max_of_three</code> that takes three numbers as parameters and <strong>returns</strong> the largest of them.</p>
+      <p class="q-text" style="color:var(--text-dim);font-size:13px;">Watch out for: (1) the colon <code class="inline">:</code> after the function header, (2) Python uses <code class="inline">True</code>/<code class="inline">False</code> capitalized (not relevant here, but keep in mind), (3) use <code class="inline">return</code>, not <code class="inline">print</code>.</p>
+      <textarea name="Q8_Answer" required placeholder="# def max_of_three(...)..."></textarea>
+    </div>
+
+    <!-- Q9 MC: Infinite loop detection (KEY) -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q9</span>
+        <span class="q-tag">Multiple Choice · Loop tracing</span>
+      </div>
+      <p class="q-text">How many times does this program print <code class="inline">"Welcome"</code>?</p>
+<pre>count = 0
+while count &lt; 10:
+    print("Welcome")
+    count = count - 1</pre>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q9" value="A" required><span>A) 0 times (the loop never runs)</span></label>
+        <label class="option"><input type="radio" name="Q9" value="B"><span>B) Exactly 10 times</span></label>
+        <label class="option"><input type="radio" name="Q9" value="C"><span>C) Exactly 9 times</span></label>
+        <label class="option"><input type="radio" name="Q9" value="D"><span>D) An infinite number of times (the loop never terminates)</span></label>
+      </div>
+    </div>
+
+    <!-- Q10 SA: What's wrong with function (KEY) -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q10</span>
+        <span class="q-tag">What's Wrong? · Function Syntax</span>
+      </div>
+      <p class="q-text">Find and explain at least <strong>three</strong> things wrong with this function. (You don't need to rewrite it — just list the bugs.)</p>
+<pre>def is_positive(x)
+    if x &gt; 0
+        return true
+    else:
+        return false</pre>
+      <textarea name="Q10_Answer" required placeholder="Bug 1: ...&#10;Bug 2: ...&#10;Bug 3: ..."></textarea>
+    </div>
+
+    <!-- Q11 MC: for + range -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q11</span>
+        <span class="q-tag">Multiple Choice · for + range</span>
       </div>
       <p class="q-text">What is printed by the following code?</p>
 <pre>for i in range(2, 11, 3):
     print(i, end=" ")</pre>
       <div class="options">
-        <label class="option"><input type="radio" name="Q4" value="A" required><span>A) <code class="inline">2 5 8</code></span></label>
-        <label class="option"><input type="radio" name="Q4" value="B"><span>B) <code class="inline">2 5 8 11</code></span></label>
-        <label class="option"><input type="radio" name="Q4" value="C"><span>C) <code class="inline">3 6 9</code></span></label>
-        <label class="option"><input type="radio" name="Q4" value="D"><span>D) <code class="inline">2 4 6 8 10</code></span></label>
+        <label class="option"><input type="radio" name="Q11" value="A" required><span>A) <code class="inline">2 5 8</code></span></label>
+        <label class="option"><input type="radio" name="Q11" value="B"><span>B) <code class="inline">2 5 8 11</code></span></label>
+        <label class="option"><input type="radio" name="Q11" value="C"><span>C) <code class="inline">3 6 9</code></span></label>
+        <label class="option"><input type="radio" name="Q11" value="D"><span>D) <code class="inline">2 4 6 8 10</code></span></label>
       </div>
     </div>
 
-    <!-- Q5 -->
-    <div class="question">
-      <div class="q-header">
-        <span class="q-num">Q5</span>
-        <span class="q-tag">Does It Compile? · Function Calls</span>
-      </div>
-      <p class="q-text">Given <code class="inline">def greet(name, count):</code>, which call would produce a <strong>SyntaxError</strong>?</p>
-      <div class="options">
-        <label class="option"><input type="radio" name="Q5" value="A" required><span>A) <code class="inline">greet("Sam", 3)</code></span></label>
-        <label class="option"><input type="radio" name="Q5" value="B"><span>B) <code class="inline">greet("Sam", count=3)</code></span></label>
-        <label class="option"><input type="radio" name="Q5" value="C"><span>C) <code class="inline">greet(name="Sam", count=3)</code></span></label>
-        <label class="option"><input type="radio" name="Q5" value="D"><span>D) <code class="inline">greet(count=3, "Sam")</code></span></label>
-      </div>
-    </div>
-
-    <!-- Q6 -->
-    <div class="question">
-      <div class="q-header">
-        <span class="q-num">Q6</span>
-        <span class="q-tag">Code Reading · List Methods</span>
-      </div>
-      <p class="q-text">After running this code, what is the value of <code class="inline">nums</code>?</p>
-<pre>nums = [10, 20, 30]
-nums.insert(1, 99)
-nums.append(40)</pre>
-      <div class="options">
-        <label class="option"><input type="radio" name="Q6" value="A" required><span>A) <code class="inline">[99, 10, 20, 30, 40]</code></span></label>
-        <label class="option"><input type="radio" name="Q6" value="B"><span>B) <code class="inline">[10, 99, 20, 30, 40]</code></span></label>
-        <label class="option"><input type="radio" name="Q6" value="C"><span>C) <code class="inline">[10, 20, 99, 30, 40]</code></span></label>
-        <label class="option"><input type="radio" name="Q6" value="D"><span>D) <code class="inline">[10, 99, 20, 40, 30]</code></span></label>
-      </div>
-    </div>
-
-    <!-- Q7 -->
-    <div class="question">
-      <div class="q-header">
-        <span class="q-num">Q7</span>
-        <span class="q-tag">What's Wrong? · Loops</span>
-      </div>
-      <p class="q-text">What is the problem with this code?</p>
-<pre>count = 0
-while count &lt; 5:
-    print(count)</pre>
-      <div class="options">
-        <label class="option"><input type="radio" name="Q7" value="A" required><span>A) Syntax error in the <code class="inline">while</code> line</span></label>
-        <label class="option"><input type="radio" name="Q7" value="B"><span>B) <code class="inline">print</code> should not be inside the loop</span></label>
-        <label class="option"><input type="radio" name="Q7" value="C"><span>C) The loop never terminates (infinite loop)</span></label>
-        <label class="option"><input type="radio" name="Q7" value="D"><span>D) Nothing — it prints 0 through 4</span></label>
-      </div>
-    </div>
-
-    <!-- Q8 -->
-    <div class="question">
-      <div class="q-header">
-        <span class="q-num">Q8</span>
-        <span class="q-tag">Concept · 2D Lists</span>
-      </div>
-      <p class="q-text">Given <code class="inline">m = [[1,2,3],[4,5,6],[7,8,9]]</code>, what does <code class="inline">m[2][1]</code> return?</p>
-      <div class="options">
-        <label class="option"><input type="radio" name="Q8" value="A" required><span>A) <code class="inline">4</code></span></label>
-        <label class="option"><input type="radio" name="Q8" value="B"><span>B) <code class="inline">5</code></span></label>
-        <label class="option"><input type="radio" name="Q8" value="C"><span>C) <code class="inline">7</code></span></label>
-        <label class="option"><input type="radio" name="Q8" value="D"><span>D) <code class="inline">8</code></span></label>
-      </div>
-    </div>
-
-    <!-- ===== SHORT ANSWER ===== -->
-
-    <!-- Q9 -->
-    <div class="question">
-      <div class="q-header">
-        <span class="q-num">Q9</span>
-        <span class="q-tag">Code Writing · Dictionaries</span>
-      </div>
-      <p class="q-text">A grocery store keeps prices in this dictionary:</p>
-<pre>prices = {"apple": 1.50, "bread": 3.00, "milk": 2.75, "eggs": 4.20}</pre>
-      <p class="q-text">Write a <code class="inline">for</code> loop that prints each item name and its price, but <strong>only</strong> for items that cost more than $2.00.</p>
-      <textarea name="Q9_Answer" required placeholder="# Type your Python code here"></textarea>
-    </div>
-
-    <!-- Q10 -->
-    <div class="question">
-      <div class="q-header">
-        <span class="q-num">Q10</span>
-        <span class="q-tag">Code Tracing · String Methods</span>
-      </div>
-      <p class="q-text">What is the exact output of this code? (Show what gets printed.)</p>
-<pre>s = "  Hello World  "
-print(s.strip().lower().replace("world", "python"))</pre>
-      <textarea name="Q10_Answer" required placeholder="Output:"></textarea>
-    </div>
-
-    <!-- Q11 -->
-    <div class="question">
-      <div class="q-header">
-        <span class="q-num">Q11</span>
-        <span class="q-tag">Code Writing · while + Sentinel</span>
-      </div>
-      <p class="q-text">Write a Python program that repeatedly asks the user to enter positive numbers and adds them to a running total. The loop should stop when the user enters <code class="inline">-1</code>. After the loop ends, print the total.</p>
-      <textarea name="Q11_Answer" required placeholder="# Type your Python code here"></textarea>
-    </div>
-
-    <!-- Q12 -->
+    <!-- Q12 SA: Function with list argument -->
     <div class="question">
       <div class="q-header">
         <span class="q-num">Q12</span>
-        <span class="q-tag">What's Wrong? · Functions</span>
+        <span class="q-tag">Code Writing · Function + List</span>
       </div>
-      <p class="q-text">Find and explain at least <strong>two</strong> things wrong with this function. (You don't need to rewrite it — just describe the bugs.)</p>
-<pre>def average(a, b, c):
-    total = a + b + c
-    average = total / 3
-print(average)</pre>
-      <textarea name="Q12_Answer" required placeholder="Bug 1: ...&#10;Bug 2: ..."></textarea>
+      <p class="q-text">Write a function called <code class="inline">sum_evens</code> that takes a list of integers as its parameter and <strong>returns</strong> the sum of only the <strong>even</strong> numbers in the list.</p>
+      <p class="q-text" style="color:var(--text-dim);font-size:13px;">Example: <code class="inline">sum_evens([1, 2, 3, 4, 5, 6])</code> should return <code class="inline">12</code>.</p>
+      <textarea name="Q12_Answer" required placeholder="# def sum_evens(nums)..."></textarea>
     </div>
 
-    <!-- Q13 -->
+    <!-- Q13 MC: Function call keyword vs positional -->
     <div class="question">
       <div class="q-header">
         <span class="q-num">Q13</span>
-        <span class="q-tag">Code Writing · Function with return</span>
+        <span class="q-tag">Multiple Choice · Function calls</span>
       </div>
-      <p class="q-text">Write a function called <code class="inline">is_even</code> that takes one integer parameter and <strong>returns</strong> <code class="inline">True</code> if the number is even, or <code class="inline">False</code> if it is odd.</p>
-      <textarea name="Q13_Answer" required placeholder="# Type your function definition here"></textarea>
+      <p class="q-text">Given <code class="inline">def greet(name, count):</code>, which of the following calls would produce a <strong>SyntaxError</strong>?</p>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q13" value="A" required><span>A) <code class="inline">greet("Sam", 3)</code></span></label>
+        <label class="option"><input type="radio" name="Q13" value="B"><span>B) <code class="inline">greet("Sam", count=3)</code></span></label>
+        <label class="option"><input type="radio" name="Q13" value="C"><span>C) <code class="inline">greet(name="Sam", count=3)</code></span></label>
+        <label class="option"><input type="radio" name="Q13" value="D"><span>D) <code class="inline">greet(count=3, "Sam")</code></span></label>
+      </div>
     </div>
 
-    <!-- Q14 -->
+    <!-- Q14 SA: List trace -->
     <div class="question">
       <div class="q-header">
         <span class="q-num">Q14</span>
-        <span class="q-tag">Code Tracing · Lists</span>
+        <span class="q-tag">Code Tracing · List methods</span>
       </div>
       <p class="q-text">What does this code print?</p>
 <pre>lst = [4, 1, 7, 3]
@@ -446,28 +409,173 @@ print(lst[1:4])</pre>
       <textarea name="Q14_Answer" required placeholder="Output:"></textarea>
     </div>
 
-    <!-- Q15 -->
+    <!-- Q15 MC: nPrint trace (from Quiz 5) -->
     <div class="question">
       <div class="q-header">
         <span class="q-num">Q15</span>
-        <span class="q-tag">Code Writing · Lists + for loop</span>
+        <span class="q-tag">Multiple Choice · Function trace</span>
       </div>
-      <p class="q-text">Write code that builds a list containing the numbers 1 through 10, then uses a <code class="inline">for</code> loop to print only the <strong>even</strong> numbers from that list.</p>
-      <textarea name="Q15_Answer" required placeholder="# Type your Python code here"></textarea>
+      <p class="q-text">Given the function below, what is printed by the call <code class="inline">nPrint(n=3, message='x')</code>?</p>
+<pre>def nPrint(message, n):
+    while n &gt; 0:
+        print(message, end='')
+        n -= 1</pre>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q15" value="A" required><span>A) <code class="inline">xxx</code></span></label>
+        <label class="option"><input type="radio" name="Q15" value="B"><span>B) <code class="inline">3x</code></span></label>
+        <label class="option"><input type="radio" name="Q15" value="C"><span>C) SyntaxError (keyword args can't be reordered)</span></label>
+        <label class="option"><input type="radio" name="Q15" value="D"><span>D) Nothing is printed</span></label>
+      </div>
     </div>
 
-    <!-- Q16 -->
+    <!-- Q16 SA: List + for + condition -->
     <div class="question">
       <div class="q-header">
         <span class="q-num">Q16</span>
-        <span class="q-tag">Code Writing · 2D Lists</span>
+        <span class="q-tag">Code Writing · Lists + for loop</span>
       </div>
-      <p class="q-text">Given the 2D list <code class="inline">grid = [[1, 2, 3], [4, 5, 6]]</code>, write a nested loop that prints every element on its own line (so the output is the numbers 1 through 6, each on a separate line).</p>
+      <p class="q-text">Write code that builds a list containing the numbers 1 through 10, then uses a <code class="inline">for</code> loop to print only the <strong>even</strong> numbers from that list.</p>
       <textarea name="Q16_Answer" required placeholder="# Type your Python code here"></textarea>
     </div>
 
+    <!-- Q17 MC: List methods insert/append -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q17</span>
+        <span class="q-tag">Multiple Choice · List methods</span>
+      </div>
+      <p class="q-text">After running the following code, what is <code class="inline">nums</code>?</p>
+<pre>nums = [10, 20, 30]
+nums.insert(1, 99)
+nums.append(40)</pre>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q17" value="A" required><span>A) <code class="inline">[99, 10, 20, 30, 40]</code></span></label>
+        <label class="option"><input type="radio" name="Q17" value="B"><span>B) <code class="inline">[10, 99, 20, 30, 40]</code></span></label>
+        <label class="option"><input type="radio" name="Q17" value="C"><span>C) <code class="inline">[10, 20, 99, 30, 40]</code></span></label>
+        <label class="option"><input type="radio" name="Q17" value="D"><span>D) <code class="inline">[10, 99, 20, 40, 30]</code></span></label>
+      </div>
+    </div>
+
+    <!-- Q18 SA: Nested loop on 2D list (KEY) -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q18</span>
+        <span class="q-tag">Code Writing · 2D Lists</span>
+      </div>
+      <p class="q-text">Given the 2D list of test scores below, write a <strong>nested loop</strong> that sums every score and then prints the total.</p>
+<pre>scores = [[85, 92, 78],
+          [90, 88, 95],
+          [70, 65, 80]]</pre>
+      <p class="q-text" style="color:var(--text-dim);font-size:13px;">Hint: outer loop goes through each row, inner loop goes through each value in that row. Use an accumulator variable initialized to <code class="inline">0</code> before the loops.</p>
+      <textarea name="Q18_Answer" required placeholder="# Type your Python code here"></textarea>
+    </div>
+
+    <!-- Q19 MC: List slicing -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q19</span>
+        <span class="q-tag">Multiple Choice · List slicing</span>
+      </div>
+      <p class="q-text">Given <code class="inline">nums = [10, 20, 30, 40, 50]</code>, what does <code class="inline">nums[1:4]</code> return?</p>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q19" value="A" required><span>A) <code class="inline">[20, 30]</code></span></label>
+        <label class="option"><input type="radio" name="Q19" value="B"><span>B) <code class="inline">[20, 30, 40]</code></span></label>
+        <label class="option"><input type="radio" name="Q19" value="C"><span>C) <code class="inline">[10, 20, 30, 40]</code></span></label>
+        <label class="option"><input type="radio" name="Q19" value="D"><span>D) <code class="inline">[20, 30, 40, 50]</code></span></label>
+      </div>
+    </div>
+
+    <!-- Q20 SA: Dictionary traversal (KEY) -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q20</span>
+        <span class="q-tag">Code Writing · Dictionaries</span>
+      </div>
+      <p class="q-text">Given the dictionary below, write a <code class="inline">for</code> loop that prints the names of students who <strong>passed</strong> (grade ≥ 70).</p>
+<pre>grades = {"Alice": 92, "Bob": 67, "Carol": 85, "Dan": 58, "Eve": 71}</pre>
+      <p class="q-text" style="color:var(--text-dim);font-size:13px;">Reminder: <code class="inline">for name in grades:</code> gives you each <em>key</em>. To get the value use <code class="inline">grades[name]</code>. Do <strong>not</strong> use <code class="inline">range()</code> — dictionaries aren't lists.</p>
+      <textarea name="Q20_Answer" required placeholder="# Type your Python code here"></textarea>
+    </div>
+
+    <!-- Q21 MC: 2D list indexing (KEY) -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q21</span>
+        <span class="q-tag">Multiple Choice · 2D list indexing</span>
+      </div>
+      <p class="q-text">Given the 2D list below, what does <code class="inline">grid[1][2]</code> return?</p>
+<pre>grid = [[10, 20, 30],
+        [40, 50, 60],
+        [70, 80, 90]]</pre>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q21" value="A" required><span>A) <code class="inline">20</code></span></label>
+        <label class="option"><input type="radio" name="Q21" value="B"><span>B) <code class="inline">40</code></span></label>
+        <label class="option"><input type="radio" name="Q21" value="C"><span>C) <code class="inline">60</code></span></label>
+        <label class="option"><input type="radio" name="Q21" value="D"><span>D) <code class="inline">80</code></span></label>
+      </div>
+    </div>
+
+    <!-- Q22 SA: Dictionary syntax fill-in-blank -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q22</span>
+        <span class="q-tag">Fill in Blank · Dictionary syntax</span>
+      </div>
+      <p class="q-text">Fill in the missing code for each line:</p>
+<pre># (a) Create an empty dictionary named 'prices'
+prices = _______________________
+
+# (b) Add a new entry for "apple" with value 1.50
+_______________________
+
+# (c) Retrieve the price stored for "apple"
+_______________________
+
+# (d) Change the price for "apple" to 2.00
+_______________________</pre>
+      <textarea name="Q22_Answer" required placeholder="a) ...&#10;b) ...&#10;c) ...&#10;d) ..."></textarea>
+    </div>
+
+    <!-- Q23 MC: Dictionary concept -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q23</span>
+        <span class="q-tag">Multiple Choice · Dictionaries</span>
+      </div>
+      <p class="q-text">Given <code class="inline">info = {"name": "Alice", "age": 30, "city": "Atlanta"}</code>, which line correctly retrieves Alice's age?</p>
+      <div class="options">
+        <label class="option"><input type="radio" name="Q23" value="A" required><span>A) <code class="inline">info[1]</code></span></label>
+        <label class="option"><input type="radio" name="Q23" value="B"><span>B) <code class="inline">info.age</code></span></label>
+        <label class="option"><input type="radio" name="Q23" value="C"><span>C) <code class="inline">info["age"]</code></span></label>
+        <label class="option"><input type="radio" name="Q23" value="D"><span>D) <code class="inline">info(age)</code></span></label>
+      </div>
+    </div>
+
+    <!-- Q24 SA: Count occurrences in a list (IA8-1 style) -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q24</span>
+        <span class="q-tag">Code Writing · List counting</span>
+      </div>
+      <p class="q-text">A classroom has recorded the noise level every hour for 10 hours:</p>
+<pre>levels = [3, 7, 5, 7, 2, 7, 8, 3, 7, 4]</pre>
+      <p class="q-text">Write code that asks the user to enter a target level (1–10), then uses a <code class="inline">for</code> loop to <strong>count and print</strong> how many times that level appears in the list. <em>Do not use the <code class="inline">.count()</code> method</em> — write the counting logic yourself.</p>
+      <textarea name="Q24_Answer" required placeholder="# Type your Python code here"></textarea>
+    </div>
+
+    <!-- Q25 SA: while True with break -->
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">Q25</span>
+        <span class="q-tag">Code Writing · while True + break</span>
+      </div>
+      <p class="q-text">Write a program that keeps asking the user to enter a password. If they type <code class="inline">"secret123"</code>, print <code class="inline">"Access granted"</code> and stop the loop. Otherwise print <code class="inline">"Try again"</code> and keep asking.</p>
+      <p class="q-text" style="color:var(--text-dim);font-size:13px;">Use the <code class="inline">while True:</code> + <code class="inline">break</code> pattern.</p>
+      <textarea name="Q25_Answer" required placeholder="# Type your Python code here"></textarea>
+    </div>
+
     <button type="submit" class="submit-btn" id="submitBtn">Submit Test</button>
-    <p class="footer-note">Your name, multiple-choice score, and all written answers will be emailed to your instructor.</p>
+    <p class="footer-note">Your name, auto-graded MC score, and all written answers will be emailed to your instructor.</p>
 
   </form>
   </div>
@@ -483,23 +591,26 @@ print(lst[1:4])</pre>
 </div>
 
 <script>
-  // Correct answers for the 8 multiple-choice questions
+  // Correct answers for the 12 multiple-choice questions
   const ANSWER_KEY = {
-    Q1: "C", // Both `import mymath` and `from mymath import square` are valid
-    Q2: "A", // "Computer"[2:6] -> "mput"
-    Q3: "A", // "ab"*3 + "c" -> "abababc"
-    Q4: "A", // range(2,11,3) -> 2,5,8
-    Q5: "D", // positional after keyword is a SyntaxError
-    Q6: "B", // [10, 99, 20, 30, 40]
-    Q7: "C", // infinite loop — count never increments
-    Q8: "D"  // m[2] is [7,8,9], [1] -> 8
+    Q1:  "C",  // Both import styles work
+    Q3:  "A",  // "mput"
+    Q5:  "C",  // "Georgia State".count('a') = 2
+    Q7:  "A",  // "abababc"
+    Q9:  "D",  // Infinite loop — count decrements so count < 10 is always True
+    Q11: "A",  // 2 5 8
+    Q13: "D",  // positional after keyword = SyntaxError
+    Q15: "A",  // xxx
+    Q17: "B",  // [10, 99, 20, 30, 40]
+    Q19: "B",  // [20, 30, 40]
+    Q21: "C",  // grid[1][2] = 60
+    Q23: "C"   // info["age"]
   };
 
   const form = document.getElementById('testForm');
   const submitBtn = document.getElementById('submitBtn');
 
   form.addEventListener('submit', function(e) {
-    // Compute MC score
     let score = 0;
     let details = [];
     for (const q in ANSWER_KEY) {
@@ -509,20 +620,15 @@ print(lst[1:4])</pre>
       if (isCorrect) score++;
       details.push(`${q}: chose ${selected} (correct: ${correct}) ${isCorrect ? '✓' : '✗'}`);
     }
-    document.getElementById('mcScore').value = `${score} / 8`;
+    document.getElementById('mcScore').value = `${score} / 12`;
     document.getElementById('mcDetails').value = details.join('\n');
 
-    // Disable button to prevent double-submit
     submitBtn.disabled = true;
     submitBtn.textContent = 'Submitting…';
 
-    // Stash score so we can show the success view if FormSubmit redirects back
-    try { sessionStorage.setItem('lastScore', `${score} / 8`); } catch(e) {}
-
-    // Let the form submit normally to FormSubmit
+    try { sessionStorage.setItem('lastScore', `${score} / 12`); } catch(e) {}
   });
 
-  // If we ever land back here with a score in session, show the success view
   window.addEventListener('DOMContentLoaded', function() {
     const params = new URLSearchParams(window.location.search);
     if (params.get('submitted') === '1') {
