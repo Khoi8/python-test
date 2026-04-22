@@ -213,7 +213,7 @@
 
   <header>
     <h1>🐍 CIS 3260 — Python Practice Test</h1>
-    <p class="subtitle">Covers Chapters 3–8: selection, strings, loops, functions, lists, and 2D lists</p>
+    <p class="subtitle">Covers Weeks 8–14: strings, loops, functions, lists, 2D lists, and dictionaries</p>
     <div class="info-box">
       <strong>16 questions</strong> · 8 multiple choice + 8 short answer · No time limit · Your results will be emailed automatically when you submit.
     </div>
@@ -245,14 +245,17 @@
     <div class="question">
       <div class="q-header">
         <span class="q-num">Q1</span>
-        <span class="q-tag">Concept · Booleans</span>
+        <span class="q-tag">Concept · Function Imports</span>
       </div>
-      <p class="q-text">Which expression evaluates to <code class="inline">True</code> when <code class="inline">x = 7</code>?</p>
+      <p class="q-text">You have a file <code class="inline">mymath.py</code> containing this function:</p>
+<pre>def square(n):
+    return n * n</pre>
+      <p class="q-text">In a <strong>separate</strong> Python file, which of the following is a correct way to use <code class="inline">square()</code>?</p>
       <div class="options">
-        <label class="option"><input type="radio" name="Q1" value="A" required><span>A) <code class="inline">x &gt; 5 and x &lt; 5</code></span></label>
-        <label class="option"><input type="radio" name="Q1" value="B"><span>B) <code class="inline">not (x == 7)</code></span></label>
-        <label class="option"><input type="radio" name="Q1" value="C"><span>C) <code class="inline">x &gt; 10 or x &lt; 5</code></span></label>
-        <label class="option"><input type="radio" name="Q1" value="D"><span>D) <code class="inline">x % 2 == 1 or x &gt; 100</code></span></label>
+        <label class="option"><input type="radio" name="Q1" value="A" required><span>A) <code class="inline">import mymath</code>, then call <code class="inline">mymath.square(5)</code></span></label>
+        <label class="option"><input type="radio" name="Q1" value="B"><span>B) <code class="inline">from mymath import square</code>, then call <code class="inline">square(5)</code></span></label>
+        <label class="option"><input type="radio" name="Q1" value="C"><span>C) Both A and B are correct</span></label>
+        <label class="option"><input type="radio" name="Q1" value="D"><span>D) You cannot reuse functions across different files</span></label>
       </div>
     </div>
 
@@ -375,12 +378,11 @@ while count &lt; 5:
     <div class="question">
       <div class="q-header">
         <span class="q-num">Q9</span>
-        <span class="q-tag">Code Writing · if / elif / else</span>
+        <span class="q-tag">Code Writing · Dictionaries</span>
       </div>
-      <p class="q-text">Write a Python program that asks the user for a temperature (an integer) and prints:
-        <br>• <code class="inline">"Hot"</code> if the temperature is greater than 85
-        <br>• <code class="inline">"Warm"</code> if the temperature is between 60 and 85 (inclusive)
-        <br>• <code class="inline">"Cold"</code> if the temperature is below 60</p>
+      <p class="q-text">A grocery store keeps prices in this dictionary:</p>
+<pre>prices = {"apple": 1.50, "bread": 3.00, "milk": 2.75, "eggs": 4.20}</pre>
+      <p class="q-text">Write a <code class="inline">for</code> loop that prints each item name and its price, but <strong>only</strong> for items that cost more than $2.00.</p>
       <textarea name="Q9_Answer" required placeholder="# Type your Python code here"></textarea>
     </div>
 
@@ -483,7 +485,7 @@ print(lst[1:4])</pre>
 <script>
   // Correct answers for the 8 multiple-choice questions
   const ANSWER_KEY = {
-    Q1: "D", // x % 2 == 1 or x > 100  -> 7 is odd, so True
+    Q1: "C", // Both `import mymath` and `from mymath import square` are valid
     Q2: "A", // "Computer"[2:6] -> "mput"
     Q3: "A", // "ab"*3 + "c" -> "abababc"
     Q4: "A", // range(2,11,3) -> 2,5,8
